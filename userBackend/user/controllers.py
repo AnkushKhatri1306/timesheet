@@ -49,18 +49,24 @@ def get_days_list_data(request):
     msg = 'Error in getting days list'
     data = {}
     try:
+        req_date = request.GET.get('month')
         current_time = datetime.now()
-        days = monthrange(current_time.year, current_time.month)[1]
-        obj = TimeSheet.objects.filter(date__month=current_time.month).order_by('date')
+        year = current_time.year
+        month = current_time.month
+        if req_date and req_date != 'null':
+            year = int(req_date[:4])
+            month = int(req_date[5:7])
+        days = monthrange(year, month)[1]
+        obj = TimeSheet.objects.filter(date__month=month, date__year=year).order_by('date')
         if not obj:
             create_list = []
             for i in range(days):
                 time_obj = TimeSheet()
-                time_obj.date = date(current_time.year, current_time.month, i+1)
+                time_obj.date = date(year, month, i+1)
                 create_list.append(time_obj)
             if create_list:
                 TimeSheet.objects.bulk_create(create_list)
-            obj = TimeSheet.objects.filter(date=current_time).order_by('date')
+            obj = TimeSheet.objects.filter(date__month=month, date__year=year).order_by('date')
         serializer = TimeSheetListSerializer(obj, many=True)
         data = serializer.data
         success_status = 'success'
@@ -99,8 +105,16 @@ def get_overall_time_diff_data(request):
     msg = 'Error in getting time difference.'
     data = {}
     try:
+        req_date = request.GET.get('month')
         curr_date = date.today()
-        data = TimeSheet.objects.filter(date__month=curr_date.month).aggregate(total_diff=Sum('diff'))
+        year = curr_date.year
+        month = curr_date.month
+        if req_date and req_date != 'null':
+            year = int(req_date[:4])
+            month = int(req_date[5:7])
+        data = TimeSheet.objects.filter(date__month=month, date__year=year).aggregate(total_diff=Sum('diff'))
+        if not data.get('total_diff'):
+            data['total_diff'] = 0
         success_status = 'success'
         msg = 'Success in getting time difference.'
     except Exception as e:
