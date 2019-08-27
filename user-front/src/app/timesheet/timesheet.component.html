@@ -8,6 +8,11 @@
             <label class="">Total : </label>
             <span class="m-l-5px">{{ overallDiff }} Minutes</span>
         </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <label>Date :</label>
+            <input type="month" class="col-md-12" [(ngModel)]="sheetDate" (change)="getDataForMonth()">
+        </div>
     </div>
     <div class="display-flex">
         <div class="col-md-12">

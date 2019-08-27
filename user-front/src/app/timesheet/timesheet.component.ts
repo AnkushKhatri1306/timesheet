@@ -17,10 +17,14 @@ export class TimesheetComponent implements OnInit {
   hourList: Array<number> = [];
   minuteList: Array<number> = [];
   overallDiff:any;
+  sheetDate:any;
 
-  ngOnInit() {   
-    this.getDaysList(null);
+  ngOnInit() {       
+    this.sheetDate = new Date().toISOString().substring(0, 7);
+    this.getDaysList(this.sheetDate);
     this.makeHourDayList();
+    console.log('date', this.sheetDate);
+    
   }
 
   checkPassword(pass:any){
@@ -46,7 +50,7 @@ export class TimesheetComponent implements OnInit {
           if(resp.status = 'success'){
             console.log('dayslist', resp.data);
             this.dayslist = resp.data;
-            this.getTimeDifference(null);
+            this.getTimeDifference(this.sheetDate);
           }
       },
       error => {
@@ -68,7 +72,7 @@ export class TimesheetComponent implements OnInit {
     this.us.saveTimeSheetData(dayData).subscribe(resp => {
       if(resp.status == "success"){
           console.log('Cleared successfully');
-          this.getDaysList(null);
+          this.getDaysList(this.sheetDate);
 
       }
     },
@@ -93,12 +97,17 @@ export class TimesheetComponent implements OnInit {
       if(resp.status == 'success'){
         console.log("Time Sheet save successfully .");
         this.openPopup = false;
-        this.getDaysList(null);
+        this.getDaysList(this.sheetDate);
       }
     },
     error => {
 
     });
+  }
+
+  getDataForMonth(){
+    console.log('hehe', this.sheetDate);
+    this.getDaysList(this.sheetDate);
   }
 
 }
