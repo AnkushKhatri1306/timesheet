@@ -1,0 +1,15 @@
+.slide-div-default{
+    right: -50%;
+    transition: 1s all;
+}
+
+.slide-div-visible{
+    right: 0px;
+    transition: 1s all;
+}
+.timsheet-div{
+    background: white;
+    border: 1px solid grey;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

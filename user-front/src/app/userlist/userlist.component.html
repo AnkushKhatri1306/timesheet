@@ -1,0 +1,26 @@
+<div class="col-md-12 padding-zero row">
+    <div class="col-md-8">
+        <h1>User List</h1>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary" routerLink="/add-user">Add user</button>
+    </div>
+    <div class="col-md-12">
+        <table class="col-md-12 table table-hover">
+            <thead class="col-md-12 row">
+                <th class="col-md-2">Sl No.</th>
+                <th class="col-md-6">Name</th>
+                <th class="col-md-4">Action</th>
+            </thead>
+            <tbody class="col-md-12">
+                <tr class="col-md-12 row" *ngFor="let user of userList; let index = index">
+                    <td class="col-md-2"> {{ index + 1 }} </td>
+                    <td class="col-md-6"> {{ user.first_name }} {{ user.last_name }}</td>
+                    <td class="col-md-4">
+                        <a href routerLink="/timesheet"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

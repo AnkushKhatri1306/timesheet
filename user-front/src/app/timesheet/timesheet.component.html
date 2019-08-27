@@ -1,0 +1,73 @@
+<!-- <div *ngIf="!accessAllowed" class="col-md-12">
+    Enter Password <input class="m-l-5px" type="password" [(ngModel)]="pass">
+    <button class="btn btn-primary m-l-5px" [disabled]="!pass" (click)="checkPassword(pass)">Submit</button>
+</div> -->
+<div class="col-md-12">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <label class="">Total : </label>
+            <span class="m-l-5px">{{ overallDiff }} Minutes</span>
+        </div>
+    </div>
+    <div class="display-flex">
+        <div class="col-md-12">
+            <table class="col-md-12 table table-hover">
+                <thead class="col-md-12 row">
+                    <th class="col-md-2">Date</th>
+                    <th class="col-md-3">Enter Time</th>
+                    <th class="col-md-3">Exit Time</th>
+                    <th class="col-md-2">Difference ( Minutes )</th>
+                    <th class="col-md-2">Action <i class="fa fa-check hand-pointer" title="Unable Clear"
+                            (click)="unableClear = !unableClear"></i></th>
+                </thead>
+                <tbody class="col-md-12">
+                    <tr class="col-md-12 row" *ngFor="let data of dayslist; let index = index">
+                        <ng-container *ngIf="data.type == 'Default'">
+                            <td class="col-md-2"> {{ data.date || "--" }} </td>
+                            <td class="col-md-3"> {{ data.entry_time || "--" }}</td>
+                            <td class="col-md-3"> {{ data.exit_time || "--" }}</td>
+                            <td class="col-md-2" *ngIf="!data.diff && data.diff != 0"> -- </td>
+                            <td class="col-md-2" *ngIf="data.diff || data.diff == 0"> {{ data.diff }}</td>
+                            <td class="col-md-2">
+                                <a class="hand-pointer" title="Edit" (click)="editTimeSheetPopup(data)">
+                                    <i class="fa fa-edit color-blue"></i></a>
+                                <a *ngIf="unableClear" class="hand-pointer m-l-5px" title="Clear"
+                                    (click)="clearTimeSheetData(data)">
+                                    <i class="fa fa-eraser color-red"></i></a>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form #myForm="ngForm" *ngIf="currentTimeData" class="timsheet-div pos-fixed col-md-4"
+            [ngClass]="openPopup ? 'slide-div-visible' : 'slide-div-default'">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <label class="col-md-12 padding-zero">Date <i class="color-red">*</i></label>
+                    <input type="date" class="col-md-12" [(ngModel)]="currentTimeData.date" name="date" required>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-12 padding-zero">Entry Time (HH:MM:AM/PM)<i class="color-red">*</i></label>
+                    <input type="time" class="col-md-12" [(ngModel)]="currentTimeData.entry_time" name="entry_time"
+                        required>
+
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-12 padding-zero">Exit Time (HH:MM:AM/PM)<i class="color-red">*</i></label>
+                    <input type="time" class="col-md-12" [(ngModel)]="currentTimeData.exit_time" name="exit_time"
+                        required>
+                </div>
+                <div class="col-md-12 m-t-10px">
+                    <div class="col-md-8 row">
+                        <button class="btn btn-primary col-md-4" [disabled]="myForm.invalid"
+                            (click)="saveTimeSheet()">Submit</button>
+                        <button class="btn btn-default col-md-4 b-1px-solid m-l-5px"
+                            (click)="openPopup = !openPopup">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

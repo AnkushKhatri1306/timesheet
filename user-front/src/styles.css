@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+.hand-pointer{
+    cursor: pointer;
+}
+
+/* COLOR */
+.color-blue{
+    color: blue;
+}
+.color-red{
+    color:  red;
+}
+
+
+/* Margin */
+
+.m-l-5px{
+    margin-left: 5px;
+}
+.m-t-10px{
+    margin-top: 10px;
+}
+
+/* PADDING */
+
+.padding-zero{
+    padding: 0px;
+}
+
+/* DISPLAY0 */
+.display-flex{
+    display: flex;
+}
+
+/* POSITION */
+.pos-fixed{
+    position: fixed
+}
+
+/* BORDER */
+.b-1px-solid{
+    border: 1px solid;
+}
