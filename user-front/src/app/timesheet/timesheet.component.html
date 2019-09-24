@@ -60,7 +60,9 @@
 
                 </div>
                 <div class="col-md-12">
-                    <label class="col-md-12 padding-zero">Exit Time (HH:MM:AM/PM)<i class="color-red">*</i></label>
+                    <label class="col-md-12 padding-zero">Exit Time (HH:MM:AM/PM)<i class="color-red">*</i>
+                        <span class="m-l-10px"><i class="fa fa-clock-o hand-pointer" (click)="updateExitTime()"></i></span>
+                    </label>
                     <input type="time" class="col-md-12" [(ngModel)]="currentTimeData.exit_time" name="exit_time"
                         required>
                 </div>

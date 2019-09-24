@@ -17,6 +17,9 @@
 .m-l-5px{
     margin-left: 5px;
 }
+.m-l-10px{
+    margin-left: 10px;
+}
 .m-t-10px{
     margin-top: 10px;
 }
@@ -40,4 +43,9 @@
 /* BORDER */
 .b-1px-solid{
     border: 1px solid;
+}
+
+/* FLOAT */
+.pull-right-c{
+    float: right;
 }
